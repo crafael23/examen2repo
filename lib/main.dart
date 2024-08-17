@@ -41,6 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final data = json.decode(response.body);
 
+    print(data['image']);
+
     return data['image'];
   }
 
@@ -48,6 +50,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String texto = '';
   String url = '';
+
+  void onSend() async {
+    if (controller.text.isEmpty) return;
+
+    if (controller.text.trim()[controller.text.length - 1] != '?') {
+      controller.clear();
+      setState(() {});
+      return;
+    }
+
+    texto = controller.text;
+    controller.clear();
+    url = await yesNoApi();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +76,24 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: SafeArea(
             child: Center(
+                child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               url.isEmpty
                   ? const CircularProgressIndicator()
                   : Image.network(url),
+              const Spacer(),
+              TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                    hintText: 'Escribe algo',
+                    border: OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                        onPressed: onSend, icon: const Icon(Icons.send))),
+              )
             ],
           ),
-        )));
+        ))));
   }
 }

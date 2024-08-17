@@ -53,13 +53,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void onSend() async {
     if (controller.text.isEmpty) return;
-
     if (controller.text.trim()[controller.text.length - 1] != '?') {
       controller.clear();
       setState(() {});
       return;
     }
-
     texto = controller.text;
     controller.clear();
     url = await yesNoApi();

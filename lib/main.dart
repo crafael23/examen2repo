@@ -83,7 +83,22 @@ class _MyHomePageState extends State<MyHomePage> {
               url.isEmpty
                   ? const CircularProgressIndicator()
                   : Image.network(url),
+              texto.isEmpty
+                  ? const SizedBox()
+                  : Text(
+                      texto,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
               const Spacer(),
+              ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      texto = '';
+                      url = '';
+                    });
+                  },
+                  child: const Text('Limpiar')),
               TextField(
                 controller: controller,
                 decoration: InputDecoration(

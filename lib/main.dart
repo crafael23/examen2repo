@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
               TextField(
                 controller: controller,
                 decoration: InputDecoration(
-                    hintText: 'Escribe algo',
+                    hintText: 'Escribe una pregunta',
                     border: OutlineInputBorder(),
                     suffixIcon: IconButton(
                         onPressed: onSend, icon: const Icon(Icons.send))),
